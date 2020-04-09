@@ -1,0 +1,15 @@
+package io.ao9.crmspringcrud.service;
+
+import java.util.List;
+
+import io.ao9.crmspringcrud.entity.Customer;
+
+public interface CustomerService {
+    public List<Customer> getCustomers();
+
+	public void saveCustomer(Customer theCustomer);
+
+	public Customer getCustomer(int theCustomerId);
+
+	public void deleteCustomer(int theCustomerId);
+}

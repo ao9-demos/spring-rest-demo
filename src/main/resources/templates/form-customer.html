@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Customer Detail</title>
+</head>
+
+<body>
+    <h1>CRM - Customer Relationship Manager</h1>
+
+    <form action="#" th:action="@{/customer/save}" th:object="${customer}" method="POST">
+        <table class="table table-dark">
+            <tbody>
+                <tr>
+                    <td><input type="hidden" th:field="*{id}" ></td>
+                </tr>
+                <tr>
+                    <td><label>First Name:</label></td>
+                    <td><input type="text" th:field="*{firstName}" ></td>
+                </tr>
+
+                <tr>
+                    <td><label>Last Name:</label></td>
+                    <td><input type="text" th:field="*{lastName}" ></td>
+                </tr>
+
+                <tr>
+                    <td><label>Email:</label></td>
+                    <td><input type="text" th:field="*{email}" ></td>
+                </tr>
+
+                <tr>
+                    <td><a type="button" class="btn btn-lg btn-secondary" th:href="@{/customer/list}">Back</a></td>
+                    <td><input type="submit" value="Save" class="btn btn-lg btn-primary"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+</body>
+
+</html>

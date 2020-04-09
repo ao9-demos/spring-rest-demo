@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Home</title>
+</head>
+<body>
+    <div sec:authorize="isAuthenticated()">
+        User: <span sec:authentication="name"></span>
+        <br>
+        Role(s): <span sec:authentication="principal.authorities"></span>
+    </div>
+
+    <p class="display-3"><p th:text="${theDate}"/></p>    
+    
+    <a type="button" class="btn btn-lg btn-primary" th:href="@{/customer/list}">Customer List</a>
+    <a type="button" class="btn btn-lg btn-primary" th:href="@{/manager}">Manager</a>
+    <a type="button" class="btn btn-lg btn-primary" th:href="@{/system}">System</a>
+    <br>
+
+    <img width="1000" th:src="@{images/bg.jpg}"/>
+</body>
+</html>
