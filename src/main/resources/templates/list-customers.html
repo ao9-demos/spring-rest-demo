@@ -43,6 +43,8 @@
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Email</th>
+				<th>City</th>
+				<th>Active</th>
 				<th sec:authorize="hasAnyRole('MANAGER', 'ADMIN')">Actions</th>
 			</tr>
 		</thead>
@@ -52,6 +54,9 @@
 				<td th:text="${tempCustomer.firstName}"/>
 				<td th:text="${tempCustomer.lastName}"/>
 				<td th:text="${tempCustomer.email}"/>
+				<td th:text="${tempCustomer.address.city}"></td>
+				<td th:if="${tempCustomer.active}">Yes</td>				
+				<td th:unless="${tempCustomer.active}">No</td>
 				<td sec:authorize="hasAnyRole('MANAGER', 'ADMIN')">
 					<a type="button" class="btn btn-lg btn-success" th:href="@{/customer/update(customerId=${tempCustomer.id})}">Update</a>
 					<a type="button" class="btn btn-lg btn-danger" th:href="@{/customer/delete(customerId=${tempCustomer.id})}" onclick="if(!(confirm('Are you sure to delete?'))) return false">Delete</a>

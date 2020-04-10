@@ -1,10 +1,13 @@
 package io.ao9.crmspringcrud.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,13 +27,23 @@ public class Customer {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "active")
+    private boolean active;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    
+
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, String email) {
+    public Customer(String firstName, String lastName, String email, boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.active = active;
     }
 
     public int getId() {
@@ -65,6 +78,26 @@ public class Customer {
         this.email = email;
     }
 
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public boolean getActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Address getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -72,6 +105,7 @@ public class Customer {
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", email='" + getEmail() + "'" +
+            ", active='" + isActive() + "'" +
             "}";
     }
 }
