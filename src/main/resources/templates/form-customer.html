@@ -82,6 +82,14 @@
         </table>
     </form>
 
+    <table class="table table-dark">
+        <td>Languages:</td>
+        <tr th:each="tempLanguage : ${customer.languages}">
+            <td th:text="${tempLanguage.id}"/>
+            <td th:text="${tempLanguage.name}"/>
+        </tr>
+    </table>
+
 </body>
 
 </html>

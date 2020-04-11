@@ -1,5 +1,7 @@
 package io.ao9.crmspringcrud.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,11 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "customer")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +37,16 @@ public class Customer {
     @Column(name = "active")
     private boolean active;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval=true)
     @JoinColumn(name = "address_id")
     private Address address;
 
-    
+    @ManyToMany()
+    @JoinTable(name = "customer_language",
+                joinColumns = @JoinColumn(name = "customer_id"),
+                inverseJoinColumns = @JoinColumn(name = "language_id"))
+    @JsonIgnoreProperties("customers")
+    private List<Language> languages;
 
     public Customer() {
     }
@@ -96,6 +108,14 @@ public class Customer {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<Language> getLanguages() {
+        return this.languages;
+    }
+
+    public void setLanguages(List<Language> languages) {
+        this.languages = languages;
     }
 
     @Override

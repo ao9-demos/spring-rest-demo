@@ -48,10 +48,11 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public void deleteCustomer(int theCustomerId) {
         Session theSession = getSession();
-        Query theQuery = theSession.createQuery("delete from Customer where id=:customerId");
-        theQuery.setParameter("customerId", theCustomerId);
-        theQuery.executeUpdate();
-        // Customer theCustomer = theSession.get(Customer.class, theCustomerId);
-        // theSession.delete(theCustomer);
+        // // cascade = CascadeType.ALL does NOT delete with query
+        // Query theQuery = theSession.createQuery("delete from Customer where id=:customerId");
+        // theQuery.setParameter("customerId", theCustomerId);
+        // theQuery.executeUpdate();
+        Customer theCustomer = theSession.get(Customer.class, theCustomerId);
+        theSession.delete(theCustomer);
     }
 }

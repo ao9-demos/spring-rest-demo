@@ -14,7 +14,6 @@
 <body>
     <div sec:authorize="isAuthenticated()">
         User: <span sec:authentication="name"></span>
-        <br>
         Role(s): <span sec:authentication="principal.authorities"></span>
     </div>
 
@@ -23,7 +22,18 @@
     <a type="button" class="btn btn-lg btn-primary" th:href="@{/customer/list}">Customer List</a>
     <a type="button" class="btn btn-lg btn-primary" th:href="@{/manager}">Manager</a>
     <a type="button" class="btn btn-lg btn-primary" th:href="@{/system}">System</a>
+    <a type="button" class="btn btn-lg btn-success" th:href="@{/login}">Login</a>
     <br>
+    <br>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <a type="button" class="btn btn-lg btn-secondary" th:href="@{/actuator/health}">health</a>
+        <a type="button" class="btn btn-lg btn-secondary" th:href="@{/actuator/info}">info</a>
+        <a type="button" class="btn btn-lg btn-secondary" th:href="@{/actuator/beans}">beans</a>
+        <a type="button" class="btn btn-lg btn-secondary" th:href="@{/actuator/mappings}">mappings</a>
+        <a type="button" class="btn btn-lg btn-secondary" th:href="@{/actuator/threaddump}">threaddump</a>
+    </div>
+    
 
     <img width="1000" th:src="@{images/bg.jpg}"/>
 </body>

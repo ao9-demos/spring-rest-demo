@@ -6,9 +6,10 @@
 	"address": {
 		"street": "100 Main St",
 		"city": "Philadelphia",
-		"state": "Pennsylvania",
+		"province": "Pennsylvania",
 		"zip": "19103",
 		"country": "USA"
 	},
-	"languages" : ["Java", "C#", "Python", "Javascript"]
+	"languages": ["Java", "C#", "Python", "Javascript"],
+	"company": "IBM"
 }

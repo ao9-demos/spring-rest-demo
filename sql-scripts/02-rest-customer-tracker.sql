@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `web_customer_tracker`;
-USE `web_customer_tracker`;
+CREATE DATABASE  IF NOT EXISTS `rest_customer_tracker`;
+USE `rest_customer_tracker`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -66,3 +66,78 @@ INSERT INTO `customer` VALUES
 	(5,'Maxwell','Dixon','max@luv2code.com',false,5);
 
 UNLOCK TABLES;
+
+--
+-- Table structure for table `language`
+--
+
+DROP TABLE IF EXISTS `language`;
+
+CREATE TABLE `language` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `language`
+--
+
+LOCK TABLES `language` WRITE;
+
+INSERT INTO `language` VALUES 
+	(1,'Java'),
+	(2,'JavaScript'),
+	(3,'Python'),
+	(4,'C++'),
+	(5,'Go');
+
+UNLOCK TABLES;
+
+--
+-- Table structure for table `language`
+--
+
+DROP TABLE IF EXISTS `customer_language`;
+
+CREATE TABLE `customer_language` (
+  `customer_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  PRIMARY KEY (`customer_id`,`language_id`),
+  CONSTRAINT `FK_CUSTOMER`
+  FOREIGN KEY (`customer_id`)
+  REFERENCES `customer` (`id`)
+  ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_LANGUAGE`
+  FOREIGN KEY (`language_id`)
+  REFERENCES `language` (`id`)
+  ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer_language`
+--
+
+LOCK TABLES `customer_language` WRITE;
+
+INSERT INTO `customer_language` VALUES 
+	(1,1),
+  (1,2),
+  (1,3),
+	(2,2),
+  (2,3),
+  (2,4),
+	(3,3),
+  (3,4),
+  (3,5),
+	(4,4),
+  (4,5),
+  (4,1),
+	(5,5),
+  (5,1),
+  (5,2);
+
+UNLOCK TABLES;
+
+
+SET FOREIGN_KEY_CHECKS = 1;

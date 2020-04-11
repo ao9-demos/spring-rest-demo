@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,6 +37,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/api/customers/**").hasRole("USER")
+                .antMatchers(HttpMethod.POST, "/api/customers/**").hasAnyRole("MANAGER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/customers/**").hasAnyRole("MANAGER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/customers/**").hasRole("ADMIN")
+
+                .antMatchers("/actuator/**").hasRole("ADMIN")
                 .antMatchers("/customer/**").hasRole("USER")
                 .antMatchers("/manager/**").hasRole("MANAGER")
                 .antMatchers("/system/**").hasRole("ADMIN")
@@ -50,6 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .permitAll()
             .and()
                 .exceptionHandling()
-                .accessDeniedPage("/access-denied");
+                .accessDeniedPage("/access-denied")
+            .and()
+                .httpBasic()
+            .and()
+                .csrf().disable(); //for api POST
     }
 }
