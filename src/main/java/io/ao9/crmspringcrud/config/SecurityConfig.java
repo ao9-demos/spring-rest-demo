@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 // import org.springframework.security.core.userdetails.User;
 // import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
@@ -63,5 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .httpBasic()
             .and()
                 .csrf().disable(); //for api POST
+                // .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // force auth for each api request
+
     }
 }

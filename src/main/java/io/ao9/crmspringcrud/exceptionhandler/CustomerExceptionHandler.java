@@ -1,4 +1,4 @@
-package io.ao9.crmspringcrud.rest;
+package io.ao9.crmspringcrud.exceptionhandler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package io.ao9.crmspringcrud.rest;
+package io.ao9.crmspringcrud.exceptionhandler;
 
 public class CustomerNotFoundException extends RuntimeException{
     /**

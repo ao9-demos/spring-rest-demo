@@ -5,11 +5,11 @@ import java.util.List;
 import io.ao9.crmspringcrud.entity.Customer;
 
 public interface CustomerService {
-    public List<Customer> getCustomers();
+    public List<Customer> findAll();
 
-	public void saveCustomer(Customer theCustomer);
+	public Customer findById(int theCustomerId);
 
-	public Customer getCustomer(int theCustomerId);
+	public void save(Customer theCustomer);
 
-	public void deleteCustomer(int theCustomerId);
+	public void deleteById(int theCustomerId);
 }

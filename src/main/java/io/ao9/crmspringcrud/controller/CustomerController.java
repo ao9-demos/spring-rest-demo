@@ -23,7 +23,7 @@ public class CustomerController {
 
     @GetMapping("/list")
     public String listCustomers(Model theModel) {
-        List<Customer> theCustomers = customerService.getCustomers();        
+        List<Customer> theCustomers = customerService.findAll();        
         theModel.addAttribute("customers", theCustomers);
         return "list-customers";
     }
@@ -37,20 +37,20 @@ public class CustomerController {
 
     @GetMapping("/update")
     public String updateCustomer(Model theModel, @RequestParam("customerId") int theCustomerId) {
-        Customer theCustomer = customerService.getCustomer(theCustomerId);
+        Customer theCustomer = customerService.findById(theCustomerId);
         theModel.addAttribute("customer", theCustomer); 
         return "form-customer";
     }
 
     @PostMapping("/save")
     public String saveCustomer(@ModelAttribute("customer") Customer theCustomer){
-        customerService.saveCustomer(theCustomer);
+        customerService.save(theCustomer);
         return "redirect:/customer/list";
     }
 
     @GetMapping("/delete")
     public String deleteCustomer(Model theModel, @RequestParam("customerId") int theCustomerId) {
-        customerService.deleteCustomer(theCustomerId);
+        customerService.deleteById(theCustomerId);
         return "redirect:/customer/list";
     }
 }
